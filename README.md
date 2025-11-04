@@ -151,6 +151,7 @@ blog_writing/
 
 ### 🚀 배포 가이드
 - **[Vercel 배포 단계별 가이드](VERCEL_DEPLOY_STEPS.md)** - Vercel 배포 완전 가이드 ⭐ **추천!**
+- **[Vercel 도메인 오류 해결](VERCEL_DOMAIN_FIX.md)** - Invalid Configuration 오류 해결 ⚠️ **문제 해결!**
 - **[Cloudflare 설정 가이드](CLOUDFLARE_SETUP.md)** - Cloudflare DNS 설정 완전 가이드 ⭐ **필수!**
 - **[WordPress 도메인 사용 가이드](WORDPRESS_DOMAIN_GUIDE.md)** - WordPress에서 구매한 도메인 사용하기
 
