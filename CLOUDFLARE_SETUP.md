@@ -2,6 +2,9 @@
 
 WordPress에서 구매한 `mukbang.life` 도메인을 Cloudflare로 연결하는 단계별 가이드입니다.
 
+> 💡 **WordPress.com 네임서버를 변경하고 싶지 않나요?**  
+> [WordPress.com에서 DNS만 변경하기](WORDPRESS_DNS_ONLY.md) 가이드를 참고하세요.
+
 ## 전체 과정 요약
 
 1. ✅ Cloudflare 가입 및 도메인 추가
