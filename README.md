@@ -151,6 +151,7 @@ blog_writing/
 
 ### 🚀 배포 가이드
 - **[Vercel 배포 단계별 가이드](VERCEL_DEPLOY_STEPS.md)** - Vercel 배포 완전 가이드 ⭐ **추천!**
+- **[Cloudflare 설정 가이드](CLOUDFLARE_SETUP.md)** - Cloudflare DNS 설정 완전 가이드 ⭐ **필수!**
 - **[WordPress 도메인 사용 가이드](WORDPRESS_DOMAIN_GUIDE.md)** - WordPress에서 구매한 도메인 사용하기
 
 프로덕션 환경에서는 다음 사항을 변경하세요:
