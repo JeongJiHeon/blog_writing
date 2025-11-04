@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        header h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+        .post-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .post-card h2 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .post-card h2 a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+        .post-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .post-excerpt {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .read-more {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+        .success {
+            color: #27ae60;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>블로그</h1>
+            <nav>
+                <a href="/">홈</a>
+                <a href="/login">로그인</a>
+                <a href="/admin">관리자</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div id="posts-list"></div>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+        let token = localStorage.getItem('token');
+
+        // 게시글 목록 로드
+        async function loadPosts() {
+            try {
+                const response = await fetch(`${API_BASE}/posts/?published_only=true&limit=10`);
+                const posts = await response.json();
+                
+                const postsList = document.getElementById('posts-list');
+                if (posts.length === 0) {
+                    postsList.innerHTML = '<div class="post-card"><p>아직 게시글이 없습니다.</p></div>';
+                    return;
+                }
+                
+                postsList.innerHTML = posts.map(post => `
+                    <div class="post-card">
+                        <h2><a href="/post/${post.slug}">${post.title}</a></h2>
+                        <div class="post-meta">
+                            작성일: ${new Date(post.created_at).toLocaleDateString('ko-KR')} | 
+                            조회수: ${post.view_count}
+                        </div>
+                        ${post.excerpt ? `<div class="post-excerpt">${post.excerpt}</div>` : ''}
+                        <a href="/post/${post.slug}" class="read-more">자세히 보기 →</a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('게시글 로드 실패:', error);
+            }
+        }
+
+        // 페이지 로드 시 게시글 목록 로드
+        loadPosts();
+    </script>
+</body>
+</html>
+
